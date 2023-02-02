@@ -26,6 +26,7 @@
       <li class="list-group-item">Item 2</li>
       <li class="list-group-item">Item 3</li>
       <li class="list-group-item">Item 4</li>
+      <li class="list-item-added">New Item</li>
     </ul>
    </div>
   </div>
@@ -33,10 +34,10 @@
 </body>
 
 <script>
-  const li = document.getElementsByClassName('list-group-item');
-  li[2].style.backgroundColor = 'green';
-  for (let i = 0; i < li.length; i++) {
-    li[i].style.fontWeight = 'bold';
-  }
+  const liAdded = document.getElementsByClassName('list-item-added');
+  liAdded[0].style.color = 'red';
+
+  const li = document.getElementsByTagName('li');
+  li[4].textContent = 'Item 5';
 </script>
 </html>
