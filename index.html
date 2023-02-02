@@ -26,7 +26,6 @@
       <li class="list-group-item">Item 2</li>
       <li class="list-group-item">Item 3</li>
       <li class="list-group-item">Item 4</li>
-      <li class="list-item-added">New Item</li>
     </ul>
    </div>
   </div>
@@ -34,10 +33,15 @@
 </body>
 
 <script>
-  const liAdded = document.getElementsByClassName('list-item-added');
-  liAdded[0].style.color = 'red';
+  // const li2 = document.querySelector('.list-group-item:nth-child(2)');
+  // li2.style.backgroundColor = 'green';
+  
+  // const li3 = document.querySelector('.list-group-item:nth-child(3)');
+  // li3.style.visibility = 'hidden';
 
-  const li = document.getElementsByTagName('li');
-  li[4].textContent = 'Item 5';
+  // let li = document.querySelectorAll('.list-group-item');
+  // li[1].style.color = 'darkgreen';
+
+  li = document.querySelectorAll('.list-group-item:nth-child(odd)').forEach((e)=>{e.style.backgroundColor = 'green'})
 </script>
 </html>
