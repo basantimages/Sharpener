@@ -5,138 +5,49 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login Form</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-    }
-
-    body {
-      width: 100vw;
-      height: 100vh;
-      background: url('https://images.pexels.com/photos/194094/pexels-photo-194094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat border-box;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-inline: 2rem;
-    }
-
-    form {
-      min-width: 30rem;
-      max-width: 50rem;
-      height: auto;
-      padding: 10px;
-      border: 1px solid orange;
-      border-radius: 10px;
-      background-color: rgba(255, 255, 255, 0.4);
-    }
-
-    form p,
-    form h2 {
-      text-align: center;
-      font-family: Verdana, Geneva, Tahoma, sans-serif;
-    }
-
-    form h2 {
-      color: rgb(254, 93, 0);
-      margin-top: 1.5rem;
-    }
-
-    form p {
-      margin-block: 1rem;
-    }
-
-    hr {
-      margin-bottom: 1rem;
-    }
-
-    form * {
-      width: 100%;
-    }
-
-    form label {
-      font-size: 1.2rem;
-    }
-
-    form input {
-      background-color: transparent;
-      outline: none;
-      border: 1px solid rgb(116, 116, 116);
-      border-radius: 20px;
-      height: 2rem;
-      margin-bottom: 0.5rem;
-      padding-inline-start: 1rem;
-      font-size: 1.1rem;
-    }
-
-    form input:nth-of-type(4),
-    form input:nth-of-type(5) {
-      width: 49.5%;
-    }
-
-    form button {
-      padding: 0.5rem;
-      font-size: 1.1rem;
-      border-radius: 10px;
-      border: none;
-      background-color: rgb(254, 93, 0, 0.5);
-      margin-top: 0.8rem;
-    }
-
-    form button:hover {
-      cursor: pointer;
-    }
-
-    form button:active {
-      background-color: rgb(254, 93, 0);
-    }
-  </style>
-
-  <script src="script.js"></script>
+  <title>Dom task 12</title>
 </head>
 
 <body>
-  <form action="" onSubmit="printDetails(event)" autocomplete="on">
-    <h2>Book a call</h2>
-    <p>Book a call slot and our representative will call you within 1hr of selected time.</p>
-    <hr>
-
+  <form action="" onsubmit="dataHandler(event)">
     <label for="name">Name:</label>
-    <input type="text" name="name" id="name" required>
+    <input type="text" id="name" required>
     <label for="email">Email:</label>
-    <input type="email" name="email" id="email" required>
+    <input type="text" id="email" required>
     <label for="phone">Phone:</label>
-    <input type="tel" name="tel" id="phone" required>
-    <label for="time">Time for Call:</label> <br>
-    <input type="date" name="date" id="time" required>
-    <input type="time" name="date" id="time" required>
-
-    <button type="submit">GET A CALL</button>
+    <input type="tel" id="phone" required>
+    <button type="submit">Submit</button>
   </form>
+  <div class="users"></div>
 </body>
 <script>
-  function printDetails(e) {
+  const form = document.forms[0];
+  const users = document.querySelector('.users');
+
+  console.log(form, users, form.children[0]);
+
+  function dataHandler(e) {
     e.preventDefault();
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const date = document.querySelector("[type='date']").value;
-    const time = document.querySelector("[type='time']").value;
+    const name = form.children[1].value;
+    const email = form.children[3].value;
+    const phone = form.children[5].value;
+    const user = name + ' -- ' + email + ' -- ' + phone;
 
-    const myObj = {name, email, phone, date, time};
-    console.log(myObj);
+    const p = document.createElement('p');
+    p.textContent = user;
+    users.appendChild(p);
 
-    const myObjSerialized = JSON.stringify(myObj);
-    console.log(myObjSerialized);
+    //setting data to local storage
+    const myObj = {
+      name, email, phone,
+    }
 
-    //Setting items to localstorage
-    localStorage.setItem('myObj', myObjSerialized);
+    localStorage.setItem(email, JSON.stringify(myObj));
+    console.log('Data saved to local storage');
 
-    const myObjDeserialized = JSON.parse(localStorage.getItem('myObj'));
-    console.log(myObjDeserialized);
-    console.log('Items saved to localStorage');
+    form.children[1].value = '';
+    form.children[3].value = '';
+    form.children[5].value = '';
   }
 </script>
 
