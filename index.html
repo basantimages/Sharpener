@@ -34,13 +34,19 @@
     const user = name + ' -- ' + email + ' -- ' + phone;
 
     const p = document.createElement('p');
-    const deleteBtn = document.createElement('button');
+    const deleteBtn = document.createElement('input');
+    const editBtn = document.createElement('input');
 
     p.textContent = user;
     deleteBtn.className = 'delete';
-    deleteBtn.textContent = 'Delete';
+    deleteBtn.type = 'button';
+    deleteBtn.value = 'Delete';
+    editBtn.className = 'edit';
+    editBtn.type = 'button';
+    editBtn.value = 'Edit';
 
     p.appendChild(deleteBtn);
+    p.appendChild(editBtn);
     users.appendChild(p);
 
     //setting data to local storage
@@ -58,12 +64,21 @@
 
   //deleting the user
   users.addEventListener('click', (e)=>{
-    if (e.target.classList.contains('delete')) {
+    if (e.target.classList.contains('delete') || e.target.classList.contains('edit')) {
       let userData = e.target.parentElement.innerText;
+      let userName = userData.split(' -- ')[0];
       let userEmail = userData.split(' -- ')[1];
+      let userPhone = userData.split(' -- ')[2];
       
       users.removeChild(e.target.parentElement);
       localStorage.removeItem(userEmail);
+
+      if (e.target.classList.contains('edit')) {
+        form.children[1].value = userName;
+        form.children[3].value = userEmail;
+        form.children[5].value = userPhone;
+      }
+
     }
   })
 </script>
