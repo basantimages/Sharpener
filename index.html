@@ -5,117 +5,139 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-  <title>Task 9 of Dom</title>
+  <title>Login Form</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: url('https://images.pexels.com/photos/194094/pexels-photo-194094.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2') center/cover no-repeat border-box;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-inline: 2rem;
+    }
+
+    form {
+      min-width: 30rem;
+      max-width: 50rem;
+      height: auto;
+      padding: 10px;
+      border: 1px solid orange;
+      border-radius: 10px;
+      background-color: rgba(255, 255, 255, 0.4);
+    }
+
+    form p,
+    form h2 {
+      text-align: center;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    form h2 {
+      color: rgb(254, 93, 0);
+      margin-top: 1.5rem;
+    }
+
+    form p {
+      margin-block: 1rem;
+    }
+
+    hr {
+      margin-bottom: 1rem;
+    }
+
+    form * {
+      width: 100%;
+    }
+
+    form label {
+      font-size: 1.2rem;
+    }
+
+    form input {
+      background-color: transparent;
+      outline: none;
+      border: 1px solid rgb(116, 116, 116);
+      border-radius: 20px;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+      padding-inline-start: 1rem;
+      font-size: 1.1rem;
+    }
+
+    form input:nth-of-type(4),
+    form input:nth-of-type(5) {
+      width: 49.5%;
+    }
+
+    form button {
+      padding: 0.5rem;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      border: none;
+      background-color: rgb(254, 93, 0, 0.5);
+      margin-top: 0.8rem;
+    }
+
+    form button:hover {
+      cursor: pointer;
+    }
+
+    form button:active {
+      background-color: rgb(254, 93, 0);
+    }
+  </style>
+
+  <script src="script.js"></script>
 </head>
 
 <body>
-  <header id="main-header" class="bg-success text-white p-4 mb-3">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6">
-          <h1 id="header-title">Item Lister</h1>
-        </div>
-        <div class="col-md-6 align-self-center">
-          <input type="text" class="form-control" id="filter" placeholder="Search Items...">
-        </div>
-      </div>
-    </div>
-  </header>
-  <div class="container">
-    <div id="main" class="card card-body">
-      <h2 class="title">Add Items</h2>
-      <form id="addForm" class="form-inline mb-3">
-        <input type="text" class="form-control mr-2" id="item">
-        <input type="text" class="form-control mr-2" id="desc">
-        <input type="submit" class="btn btn-dark" value="Submit">
-      </form>
-      <h2 class="title">Items</h2>
-      <ul id="items" class="list-group">
-        <li class="list-group-item">Item 1 <button class="btn btn-danger btn-sm float-right edit">+</button> <button class="btn btn-danger btn-sm float-right delete">⨯</button></li>
-        <li class="list-group-item">Item 2 <button class="btn btn-danger btn-sm float-right edit">+</button> <button class="btn btn-danger btn-sm float-right delete">⨯</button></li>
-        <li class="list-group-item">Item 3 <button class="btn btn-danger btn-sm float-right edit">+</button> <button class="btn btn-danger btn-sm float-right delete">⨯</button></li>
-        <li class="list-group-item">Item 4 <button class="btn btn-danger btn-sm float-right edit">+</button> <button class="btn btn-danger btn-sm float-right delete">⨯</button></li>
-      </ul>
-    </div>
-  </div>
+  <form action="" onSubmit="printDetails(event)" autocomplete="on">
+    <h2>Book a call</h2>
+    <p>Book a call slot and our representative will call you within 1hr of selected time.</p>
+    <hr>
+
+    <label for="name">Name:</label>
+    <input type="text" name="name" id="name" required>
+    <label for="email">Email:</label>
+    <input type="email" name="email" id="email" required>
+    <label for="phone">Phone:</label>
+    <input type="tel" name="tel" id="phone" required>
+    <label for="time">Time for Call:</label> <br>
+    <input type="date" name="date" id="time" required>
+    <input type="time" name="date" id="time" required>
+
+    <button type="submit">GET A CALL</button>
+  </form>
 </body>
 <script>
-  var form = document.getElementById('addForm');
-  var itemList = document.getElementById('items');
-  var filter = document.getElementById('filter');
-
-  // Form submit event
-  form.addEventListener('submit', addItem);
-  // Delete event
-  itemList.addEventListener('click', manipulateItem);
-  // Filter event
-  filter.addEventListener('keyup', filterItems);
-
-  // Add item
-  function addItem(e) {
+  function printDetails(e) {
     e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const phone = document.getElementById('phone').value;
+    const date = document.querySelector("[type='date']").value;
+    const time = document.querySelector("[type='time']").value;
 
-    // Get input value
-    var newItem = document.getElementById('item').value;
-    var newDesc = document.getElementById('desc').value;
+    console.log("Name :", name);
+    console.log("Email :", email);
+    console.log("Phone :", phone);
+    console.log("Date :", date);
+    console.log("Time :", time);
 
-    // Create new li element
-    var li = document.createElement('li');
-    // Add class
-    li.className = 'list-group-item';
-    // Add text node with input value
-    li.appendChild(document.createTextNode(newItem + ' ' + newDesc));
+    localStorage.setItem('name', name);
+    localStorage.setItem('email', email);
+    localStorage.setItem('phone', phone);
+    localStorage.setItem('date', date);
+    localStorage.setItem('time', time);
 
-    // Create del button element
-    var deleteBtn = document.createElement('button');
-    var editBtn = document.createElement('button');
-
-    // Add classes to del button
-    deleteBtn.className = 'btn btn-danger btn-sm float-right delete';
-    editBtn.className = 'btn btn-danger btn-sm float-right edit';
-
-    // Append text node
-    editBtn.appendChild(document.createTextNode('+'));
-    deleteBtn.appendChild(document.createTextNode('⨯'));
-
-    // Append button to li
-    li.appendChild(editBtn);
-    li.appendChild(deleteBtn);
-
-    // Append li to list
-    itemList.appendChild(li);
-  }
-
-  // manipulate item
-  function manipulateItem(e) {
-    if (e.target.classList.contains('delete')) {
-      if (confirm('Are You Sure?')) {
-        var li = e.target.parentElement;
-        itemList.removeChild(li);
-      }
-    }
-
-    if (e.target.classList.contains('edit')) {
-      e.target.parentElement.firstChild.textContent = prompt('Enter new value');
-    }
-  }
-
-  // Filter Items
-  function filterItems(e) {
-    // convert text to lowercase
-    var text = e.target.value.toLowerCase();
-    // Get lis
-    var items = itemList.getElementsByTagName('li');
-    // Convert to an array
-    Array.from(items).forEach(function (item) {
-      var itemName = item.firstChild.textContent;
-      if (itemName.toLowerCase().indexOf(text) != -1) {
-        item.style.display = 'block';
-      } else {
-        item.style.display = 'none';
-      }
-    });
+    console.log('Items saved to localStorage');
   }
 </script>
 
