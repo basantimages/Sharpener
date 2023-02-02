@@ -125,18 +125,17 @@
     const date = document.querySelector("[type='date']").value;
     const time = document.querySelector("[type='time']").value;
 
-    console.log("Name :", name);
-    console.log("Email :", email);
-    console.log("Phone :", phone);
-    console.log("Date :", date);
-    console.log("Time :", time);
+    const myObj = {name, email, phone, date, time};
+    console.log(myObj);
 
-    localStorage.setItem('name', name);
-    localStorage.setItem('email', email);
-    localStorage.setItem('phone', phone);
-    localStorage.setItem('date', date);
-    localStorage.setItem('time', time);
+    const myObjSerialized = JSON.stringify(myObj);
+    console.log(myObjSerialized);
 
+    //Setting items to localstorage
+    localStorage.setItem('myObj', myObjSerialized);
+
+    const myObjDeserialized = JSON.parse(localStorage.getItem('myObj'));
+    console.log(myObjDeserialized);
     console.log('Items saved to localStorage');
   }
 </script>
